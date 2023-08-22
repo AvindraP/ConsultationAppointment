@@ -23,5 +23,4 @@ namespace Tests.Helper
             return _dbContextOptions;
         }
     }
-    
 }
