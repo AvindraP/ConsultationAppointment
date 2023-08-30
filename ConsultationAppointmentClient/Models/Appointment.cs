@@ -35,3 +35,4 @@ namespace ConsultationAppointmentClient.Models
         public string Time { get; set; } = "";
 
     }
+}
