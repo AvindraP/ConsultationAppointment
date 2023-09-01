@@ -43,10 +43,10 @@ namespace ConsultationAppointment.Controllers
             return Ok(appointment);
         }
 
-        [HttpPut("{appointmentID}")]
-        public async Task<ActionResult> Update(int appointmentID, Appointment appointment)
+        [HttpPut("{appointmentId}")]
+        public async Task<ActionResult> Update(int appointmentId, Appointment appointment)
         {
-            if (appointmentID != appointment.AppointmentId)
+            if (appointmentId != appointment.AppointmentId)
                 return BadRequest();
 
             _context.Entry(appointment).State = EntityState.Modified;
@@ -55,10 +55,10 @@ namespace ConsultationAppointment.Controllers
             return Ok();
         }
 
-        [HttpDelete("{appointmentID}")]
-        public async Task<IActionResult> Delete(int appointmentID)
+        [HttpDelete("{AppointmentId}")]
+        public async Task<IActionResult> Delete(int AppointmentId)
         {
-            var appointment = await _context.Appointments.FindAsync(appointmentID);
+            var appointment = await _context.Appointments.FindAsync(AppointmentId);
             if(appointment == null)
             {
                 return NotFound();

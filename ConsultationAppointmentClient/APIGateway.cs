@@ -122,7 +122,32 @@ namespace ConsultationAppointmentClient
             }
             catch (Exception ex)
             {
-                throw new Exception("Error occurred at the API Endpoint, Error Info.  "+ ex.Message)l;
+                throw new Exception("Error occurred at the API Endpoint, Error Info.  "+ ex.Message);
+            }
+            finally { }
+
+            return;
+        }
+
+        public void DeleteAppointment(int appointmentId)
+        {
+            if (url.Trim().Substring(0, 5).ToLower() == "https")
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
+            url = url + "/" + appointmentId;
+
+            try
+            {
+                HttpResponseMessage response = httpClient.DeleteAsync(url).Result;
+                if (!response.IsSuccessStatusCode)
+                {
+                    string result = response.Content.ReadAsStringAsync().Result;
+                    throw new Exception("Error occured at the API end point, Error Info " + result);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error occured at the API end point, Error Info:  " + ex.Message);
             }
             finally { }
 

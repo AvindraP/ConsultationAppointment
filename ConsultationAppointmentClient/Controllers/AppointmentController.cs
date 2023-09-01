@@ -46,25 +46,35 @@ namespace ConsultationAppointmentClient.Controllers
         }
 
         //edit method
-        [HttpPost]
+        [HttpGet]
         public IActionResult Edit(int appointmentId)
         {
-            Appointment appointment = new Appointment();
+            Appointment appointment;
             //fetch the appointment from the API and show the appointment details in the edit view
+            appointment = apiGateway.GetAppointment(appointmentId);
             return View(appointment);
         }
         [HttpPost]
         public IActionResult Edit(Appointment appointment)
         {
             //do the API edit action and send the control to the Index Action
+            apiGateway.UpdateAppointment(appointment);
             return RedirectToAction("index");
         }
 
         //delete method
+        [HttpGet]
+        public IActionResult Delete(int AppointmentId)
+        {
+            Appointment appointment;
+            appointment = apiGateway.GetAppointment(AppointmentId);
+            return View(appointment);
+        }
         [HttpPost]
         public IActionResult Delete(Appointment appointment)
         {
             //do the API delete action and send the control to Index action
+            apiGateway.DeleteAppointment(appointment.AppointmentId);
             return RedirectToAction("index");
         }
     }
