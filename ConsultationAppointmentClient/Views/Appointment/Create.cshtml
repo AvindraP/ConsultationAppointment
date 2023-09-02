@@ -59,7 +59,7 @@
         </form>
     </div>
 </div>
-<div id="error-message" style="display:block;" class="text-danger"></div>
+<div id="errorMessage" style="display:block;" class="text-danger"></div>
 <div>
     <a asp-action="Index" class="btn btn-primary btn btn--radius-2 btn--blue">Back to List</a>
 </div>
@@ -67,46 +67,60 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
-<script>
-    
-    $(document).ready(function () {
-        $("#appointment-form").submit(function (event) {
-            event.preventDefault();
 
-            $.ajax({
-                type: "POST",
-                url: "https://localhost:7159/api/appointment/Create", // Replace with the correct URL
-                data: $("#appointment-form").serialize(),
-                success: function (data) {
-                    // Handle success - you can update the UI or redirect as needed
-                    alert(data.Message); // Display a success message
-                    // Redirect or update the UI as needed
-                },
-                error: function (xhr) {
-                    // Handle errors - display validation errors or other messages
-                    if (xhr.status === 400) {
-                        // If the server returns a 400 status code (Bad Request),
-                        // it means there's a duplicate data error.
-                        var errorInfo = JSON.parse(xhr.responseText);
-                        $("#duplicate-error").text(errorInfo.errorMessage);
-                    } else {
-                        // Handle other errors here
-                        var errorInfo = JSON.parse(xhr.responseText);
-                        alert("An error occurred: " + errorInfo.errorMessage);
-                    }
-                }
+@*<script>
+    
+    document.addEventListener("DOMContentLoaded", function () {
+        var form = document.getElementById("create-form");
+        var errorMessageElement = document.getElementById("error-message"); // Ensure you have this element
+
+        if (form) {
+            form.addEventListener("submit", function (event) {
+                event.preventDefault();
+
+                var formData = new FormData(this);
+
+                fetch("/api/Appointment/Create", {
+                    method: "POST",
+                    body: formData
+                })
+                    .then(response => {
+                        if (response.status === 400) {
+                            return response.json().then(errorResponse => {
+                                var errorMessage = errorResponse.errorMessage;
+                                errorMessageElement.innerText = errorMessage;
+                            }); 
+                        } else if (response.ok) {
+                            return response.json();
+                        } else {
+                            // Handle other status codes as needed
+                        }
+                    })
+                    .then(data => {
+                        if (!errorMessageElement.innerText) {
+                            // No error, perform the redirect here
+                            window.location.href = "/index"; // Adjust the URL as needed
+                            console.log("no error test:", errorMessageElement);
+                            console.log("no errr", errorMessage);
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error:", error);
+                        console.log("Error message element:", errorMessageElement);
+                        console.log("Error message:", errorMessage);
+                    });
             });
-        });
+        }
     });
-    
-    //document.getElementById("Date").addEventListener("change", function() {
-    //    // Get the selected date
-    //    var selectedDate = this.value;
 
-    //    // Convert the date to the ISO format (yyyy-mm-dd) expected by the server
-    //    var isoDate = new Date(selectedDate).toISOString().split('T')[0];
+        //document.getElementById("Date").addEventListener("change", function() {
+        //    // Get the selected date
+        //    var selectedDate = this.value;
 
-    //    // Update the input value with the ISO-formatted date
-    //    this.value = isoDate;
-    //});
-</script>
+        //    // Convert the date to the ISO format (yyyy-mm-dd) expected by the server
+        //    var isoDate = new Date(selectedDate).toISOString().split('T')[0];
+
+        //    // Update the input value with the ISO-formatted date
+        //    this.value = isoDate;
+        //});
+</script>*@

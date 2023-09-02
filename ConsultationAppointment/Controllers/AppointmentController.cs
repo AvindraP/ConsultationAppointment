@@ -49,8 +49,8 @@ namespace ConsultationAppointment.Controllers
             // Check for a duplicate appointment based on the Date property
             if (IsDuplicateAppointment(appointment.Date))
             {
-                ModelState.AddModelError("Date", "An appointment with the same date already exists.");
-                return BadRequest(new { ErrorMessage = "An appointment with the same date already exists." });
+                ModelState.AddModelError("Date", "An appointment with the same date already exists..");
+                return BadRequest(new { ErrorMessage = "An appointment with the same date already exiists." });
             }
 
             _context.Add(appointment);

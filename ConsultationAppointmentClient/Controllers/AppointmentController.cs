@@ -15,8 +15,6 @@ namespace ConsultationAppointmentClient.Controllers
         }
         public IActionResult Index(string curre)
         {
-            
-
             //var isLogin = HttpContext.Session.GetString("isLogin");
 
             string? email = HttpContext.Session.GetString("Email");
@@ -32,13 +30,9 @@ namespace ConsultationAppointmentClient.Controllers
             {
                return RedirectToAction("Login","Home");
             }
-
-
-            
-
-
         }
 
+        //create
         [HttpGet]
         public IActionResult Create()
         {
@@ -46,7 +40,6 @@ namespace ConsultationAppointmentClient.Controllers
             return View(appointment);
         }
 
-        //create
         [HttpPost]
         public IActionResult Create(Appointment appointment) 
         {
@@ -82,10 +75,10 @@ namespace ConsultationAppointmentClient.Controllers
 
         //delete method
         [HttpGet]
-        public IActionResult Delete(int AppointmentId)
+        public IActionResult Delete(int appointmentId)
         {
             Appointment appointment;
-            appointment = apiGateway.GetAppointment(AppointmentId);
+            appointment = apiGateway.GetAppointment(appointmentId);
             return View(appointment);
         }
         [HttpPost]
