@@ -71,6 +71,45 @@ namespace ConsultationAppointmentClient
             return appointment;
         }
 
+        //public ApiResponse<Appointment> CreateAppointment(Appointment appointment)
+        //{
+        //    if (url.Trim().Substring(0, 5).ToLower() == "https")
+        //        ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
+        //    string json = JsonConvert.SerializeObject(appointment);
+        //    try
+        //    {
+        //        HttpResponseMessage response = httpClient.PostAsync(url, new StringContent(json, Encoding.UTF8, "application/json")).Result;
+        //        if (response.IsSuccessStatusCode)
+        //        {
+        //            string result = response.Content.ReadAsStringAsync().Result;
+        //            var data = JsonConvert.DeserializeObject<Appointment>(result);
+
+        //            if (data != null)
+        //                return new ApiResponse<Appointment> { Data = data };
+        //        }
+        //        else
+        //        {
+        //            string result = response.Content.ReadAsStringAsync().Result;
+        //            var errorResponse = JsonConvert.DeserializeObject<ApiResponse<object>>(result);
+
+        //            if (errorResponse != null && errorResponse.ErrorMessage != null)
+        //            {
+        //                // Handle the error response and return it
+        //                return new ApiResponse<Appointment> { ErrorMessage = errorResponse.ErrorMessage };
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // Handle exceptions and return an error response
+        //        return new ApiResponse<Appointment> { ErrorMessage = "An error occurred at the API Endpoint, Error Info: " + ex.Message };
+        //    }
+
+        //    // If none of the success or error conditions were met, return a generic error response
+        //    return new ApiResponse<Appointment> { ErrorMessage = "An unexpected error occurred at the API Endpoint." };
+        //}
+
         public Appointment GetAppointment(int appointmentId)
         {
             Appointment appointment = new Appointment();

@@ -13,12 +13,30 @@ namespace ConsultationAppointmentClient.Controllers
         {
             this.apiGateway = ApiGateway;
         }
-        public IActionResult Index()
+        public IActionResult Index(string curre)
         {
-            List<Appointment> appointments;
-            //API GET Will come
-            appointments = apiGateway.ListAppointments();
-            return View(appointments);
+            
+
+            //var isLogin = HttpContext.Session.GetString("isLogin");
+
+            string? email = HttpContext.Session.GetString("Email");
+
+            if(email=="test@test.com")
+            {
+                List<Appointment> appointments;
+                //API GET Will come
+                appointments = apiGateway.ListAppointments();
+                return View(appointments);
+            }
+            else
+            {
+               return RedirectToAction("Login","Home");
+            }
+
+
+            
+
+
         }
 
         [HttpGet]
@@ -34,7 +52,7 @@ namespace ConsultationAppointmentClient.Controllers
         {
             apiGateway.CreateAppointment(appointment);
             //do the API create and send the control to Index Action
-            return RedirectToAction("index");
+            return RedirectToAction("Success","Home");
         }
 
         public IActionResult Details(int appointmentId)

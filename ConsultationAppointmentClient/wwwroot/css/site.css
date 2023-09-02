@@ -16,3 +16,78 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.card-4 {
+    background: #fff;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    -webkit-box-shadow: 0 8px 20px 0 rgba(0,0,0,.15);
+    -moz-box-shadow: 0 8px 20px 0 rgba(0,0,0,.15);
+    box-shadow: 0 8px 20px 0 rgba(0,0,0,.15);
+}
+
+    .card-4 .card-body {
+        padding: 57px 65px;
+        padding-bottom: 65px;
+    }
+.form-control {
+    line-height: 44px;
+    background: #fafafa;
+    -webkit-box-shadow: inset 0 1px 3px 0 rgba(0,0,0,.08);
+    -moz-box-shadow: inset 0 1px 3px 0 rgba(0,0,0,.08);
+    box-shadow: inset 0 1px 3px 0 rgba(0,0,0,.08);
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding: 0 20px;
+    font-size: 16px;
+    color: #666;
+    -webkit-transition: all .4s ease;
+    -o-transition: all .4s ease;
+    -moz-transition: all .4s ease;
+    transition: all .4s ease;
+}
+.control-label {
+    font-size: 16px;
+    color: #555;
+    text-transform: capitalize;
+    display: block;
+    margin-bottom: 5px;
+}
+.title {
+    font-size: 24px;
+    color: #525252;
+    font-weight: 400;
+    margin-bottom: 25px;
+}
+.btn--blue {
+    background: #4272d7;
+}
+
+.btn--radius-2 {
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.btn {
+    display: inline-block;
+    line-height: 50px;
+    padding: 0 50px;
+    -webkit-transition: all .4s ease;
+    -o-transition: all .4s ease;
+    -moz-transition: all .4s ease;
+    transition: all .4s ease;
+    cursor: pointer;
+    font-size: 18px;
+    color: #fff;
+    font-family: poppins,arial,helvetica neue,sans-serif;
+}
+
+.p-t-15 {
+    padding-top: 15px;
+}
+body {
+    background: linear-gradient(to top right,#102c3c 0%,#6c4079 100%);
+}

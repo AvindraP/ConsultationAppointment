@@ -1,6 +1,8 @@
 ﻿using ConsultationAppointmentClient.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+
 
 namespace ConsultationAppointmentClient.Controllers
 {
@@ -13,12 +15,50 @@ namespace ConsultationAppointmentClient.Controllers
             _logger = logger;
         }
 
+
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+
+        public ActionResult Logout()
+        {
+            HttpContext.Session.SetString("Email", "");
+            return RedirectToAction("Login","Home");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(string email, string password)
+        {
+            if (ModelState.IsValid)
+            {
+
+                 if (email == "test@test.com" && password == "test")
+                {
+                   HttpContext.Session.SetString("Email", email);
+                    //HttpContext.Session.SetString("idUser", email);
+                    //Session["Email"] = email;
+                    //Session["idUser"] = password;
+                    return RedirectToAction("Index","Appointment");
+                }
+                else
+                {
+                    HttpContext.Session.SetString("Email", "");
+                    ViewBag.error = "Login failed";
+                    return RedirectToAction("Login");
+                }
+            }
+            return View();
+        }
+
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Success()
         {
             return View();
         }

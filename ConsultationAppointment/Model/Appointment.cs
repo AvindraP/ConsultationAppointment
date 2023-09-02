@@ -23,7 +23,7 @@ namespace ConsultationAppointment.Model
         [StringLength(75)]
         public string ContactNo { get; set; } = "";
 
-        [StringLength(75)]
+        //[DisplayName("Date of Birth")]
         public string Date { get; set; } = "";
 
         [StringLength(75)]

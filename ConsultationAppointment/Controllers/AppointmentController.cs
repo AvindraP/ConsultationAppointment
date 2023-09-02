@@ -35,12 +35,33 @@ namespace ConsultationAppointment.Controllers
             return appointment;
         }
 
+        //[HttpPost]
+        //public async Task<ActionResult<Appointment>> Create(Appointment appointment)
+        //{
+        //    _context.Add(appointment);
+        //    await _context.SaveChangesAsync();
+        //    return Ok(appointment);
+        //}
+
         [HttpPost]
-        public async Task<ActionResult<Appointment>> Create(Appointment appointment)
+        public async Task<IActionResult> Create(Appointment appointment)
         {
+            // Check for a duplicate appointment based on the Date property
+            if (IsDuplicateAppointment(appointment.Date))
+            {
+                ModelState.AddModelError("Date", "An appointment with the same date already exists.");
+                return BadRequest(new { ErrorMessage = "An appointment with the same date already exists." });
+            }
+
             _context.Add(appointment);
             await _context.SaveChangesAsync();
             return Ok(appointment);
+        }
+
+        private bool IsDuplicateAppointment(string date)
+        {
+            // Check for a duplicate appointment with the same date
+            return _context.Appointments.Any(a => a.Date == date);
         }
 
         [HttpPut("{appointmentId}")]
