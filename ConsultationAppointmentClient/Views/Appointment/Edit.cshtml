@@ -5,6 +5,9 @@
 }
 
 <div class="card card-4 row col-md-6 offset-md-4">
+    <div class="text-md-end">
+        <a class="text-dark" asp-area="" asp-controller="Home" asp-action="Logout">Logout</a>
+    </div>
     <div class="card-body">
         <h3 class="title">Edit Appointment</h3>
         <hr />
@@ -53,13 +56,14 @@
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary btn btn--radius-2 btn--blue" />
             </div>
+            <div>
+                <a asp-action="Index">Back to List</a>
+            </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index" class="btn btn-primary btn btn--radius-2 btn--blue">Back to List</a>
-</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

@@ -1,8 +1,14 @@
 ﻿@{
     ViewData["Title"] = "Success Message";
 }
-<h1>@ViewData["Success"]</h1>
 
-<p>Appointment made successfully</p>
-<p>To create a new appointment</p>
-<a class="nav-link text-dark" asp-area="" asp-controller="Appointment" asp-action="Create">Create new appointment</a>
+<div class="row justify-content-md-center">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="notify-card-body text-center">
+                <p class="notify-title">  Appointment made successfully</p>
+                <a class="btn-notify-back btn-primary btn btn--radius-2 btn--blue" asp-area="" asp-controller="Appointment" asp-action="Create">Create new appointment</a>
+            </div>  
+        </div>
+    </div>
+</div>

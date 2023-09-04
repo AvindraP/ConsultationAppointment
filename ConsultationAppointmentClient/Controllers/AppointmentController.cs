@@ -1,4 +1,5 @@
 ﻿using ConsultationAppointmentClient.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.DotNet.Scaffolding.Shared.ProjectModel;
 
@@ -13,13 +14,14 @@ namespace ConsultationAppointmentClient.Controllers
         {
             this.apiGateway = ApiGateway;
         }
-        public IActionResult Index(string curre)
+        public IActionResult Index(string curre, string rolename)
         {
-            //var isLogin = HttpContext.Session.GetString("isLogin");
 
-            string? email = HttpContext.Session.GetString("Email");
+            string? role = TempData["Role"] as string;
+            string? userrole = HttpContext.Session.GetString("Role");
 
-            if(email=="test@test.com")
+
+            if (userrole=="Receptionist" || userrole == "Admin")
             {
                 List<Appointment> appointments;
                 //API GET Will come
@@ -36,34 +38,67 @@ namespace ConsultationAppointmentClient.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            Appointment appointment = new Appointment();
-            return View(appointment);
-        }
+            string? role = TempData["Role"] as string;
+            string? userrole = HttpContext.Session.GetString("Role");
 
-        [HttpPost]
+
+            if (userrole == "Receptionist" || userrole == "Admin")
+            {
+                Appointment appointment = new Appointment();
+                return View(appointment);
+            }
+            else
+            {
+                return RedirectToAction("Login", "Home");
+            }
+        }
+            [HttpPost]
         public IActionResult Create(Appointment appointment) 
         {
             apiGateway.CreateAppointment(appointment);
             //do the API create and send the control to Index Action
             return RedirectToAction("Success","Home");
+
         }
 
         public IActionResult Details(int appointmentId)
         {
-            Appointment appointment = new Appointment();
-            // fetch the appointment from the API and show the appointment details in the Details View
-            appointment = apiGateway.GetAppointment(appointmentId);
-            return View(appointment);
-        }
+            string? role = TempData["Role"] as string;
+            string? userrole = HttpContext.Session.GetString("Role");
 
+
+            if (userrole == "Receptionist" || userrole == "Admin")
+            {
+                Appointment appointment = new Appointment();
+                // fetch the appointment from the API and show the appointment details in the Details View
+                appointment = apiGateway.GetAppointment(appointmentId);
+                return View(appointment);
+            }
+            else
+            {
+                return RedirectToAction("Login", "Home");
+            }
+        }
         //edit method
         [HttpGet]
         public IActionResult Edit(int appointmentId)
         {
-            Appointment appointment;
-            //fetch the appointment from the API and show the appointment details in the edit view
-            appointment = apiGateway.GetAppointment(appointmentId);
-            return View(appointment);
+            string? role = TempData["Role"] as string;
+            string? userrole = HttpContext.Session.GetString("Role");
+
+
+            if (userrole == "Receptionist" || userrole == "Admin")
+            {
+                Appointment appointment;
+                //fetch the appointment from the API and show the appointment details in the edit view
+                appointment = apiGateway.GetAppointment(appointmentId);
+                return View(appointment);
+            }
+            else
+            {
+                return RedirectToAction("Login", "Home");
+            }
+
         }
         [HttpPost]
         public IActionResult Edit(Appointment appointment)
@@ -77,9 +112,21 @@ namespace ConsultationAppointmentClient.Controllers
         [HttpGet]
         public IActionResult Delete(int appointmentId)
         {
-            Appointment appointment;
-            appointment = apiGateway.GetAppointment(appointmentId);
-            return View(appointment);
+            string? role = TempData["Role"] as string;
+            string? userrole = HttpContext.Session.GetString("Role");
+
+
+            if (userrole == "Admin")
+            {
+                Appointment appointment;
+                appointment = apiGateway.GetAppointment(appointmentId);
+                return View(appointment);
+            }
+            else
+            {
+                return RedirectToAction("Login", "Home");
+
+            }
         }
         [HttpPost]
         public IActionResult Delete(Appointment appointment)

@@ -91,3 +91,30 @@ body {
 body {
     background: linear-gradient(to top right,#102c3c 0%,#6c4079 100%);
 }
+
+.btn-notify-back {
+    display: inline-block;
+    line-height: 42px;
+    padding: 0 50px;
+    -webkit-transition: all .4s ease;
+    -o-transition: all .4s ease;
+    -moz-transition: all .4s ease;
+    transition: all .4s ease;
+    cursor: pointer;
+    font-size: 14px;
+    color: #fff;
+    font-family: poppins,arial,helvetica neue,sans-serif;
+}
+.notify-title {
+    font-weight: 700;
+    font-size: 21px;
+}
+.notify-card-body {
+    flex: 1 1 auto;
+    padding: 4rem 1rem;
+}
+.home-container {
+    padding-top: 15%;
+    padding-bottom: 15%;
+    min-width: 100%;
+}

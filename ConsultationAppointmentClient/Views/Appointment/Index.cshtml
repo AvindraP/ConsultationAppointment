@@ -5,74 +5,77 @@
 }
 
 <div class="card-4 card-body">
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-    <h3 class="title">All Appointment</h3>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.AppointmentId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Nic)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.HomeAddress)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ContactNo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Date)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Time)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.AppointmentId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nic)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HomeAddress)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ContactNo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Time)
-            </td>
-            <td>
-                    @Html.ActionLink("Edit", "Edit", new { appointmentId=item.AppointmentId }) |
-                    @Html.ActionLink("Details", "Details", new { appointmentId=item.AppointmentId }) |
-                    @Html.ActionLink("Delete", "Delete", new { appointmentId=item.AppointmentId })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <div class="text-md-end">
+            <a class="text-dark" asp-area="" asp-controller="Home" asp-action="Logout">Logout</a>
+    </div>
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+        <h3 class="title">All Appointment</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.AppointmentId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LastName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nic)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HomeAddress)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ContactNo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Time)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AppointmentId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nic)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HomeAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContactNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Time)
+                </td>
+                <td>
+                        @Html.ActionLink("Edit", "Edit", new { appointmentId=item.AppointmentId }) |
+                        @Html.ActionLink("Details", "Details", new { appointmentId=item.AppointmentId }) |
+                        @Html.ActionLink("Delete", "Delete", new { appointmentId=item.AppointmentId })
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>
 </div>

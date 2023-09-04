@@ -17,23 +17,20 @@ namespace Tests
         {
             // Arrange
             var options = new DbContextOptionsBuilder<AppDbContext>()
-                .UseInMemoryDatabase(databaseName: "appointmentDatabase") // Use in-memory database for testing
+                .UseInMemoryDatabase(databaseName: "appointmentDatabase")
                 .Options;
 
             // Act & Assert
             using (var context = new AppDbContext(options))
             {
-                // Attempt to perform a database operation, e.g., query or migration
                 try
                 {
-                    context.Database.EnsureCreated(); // This can be any database operation
+                    context.Database.EnsureCreated();
 
-                    // If the operation succeeds, the connection is valid
-                    Assert.True(true); // You can use any suitable assertion here
+                    Assert.True(true);
                 }
                 catch (Exception ex)
                 {
-                    // If an exception occurs, the connection is not valid
                     Assert.False(true, $"Database connection test failed: {ex.Message}");
                 }
             }

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Reflection;
 
 
 namespace ConsultationAppointmentClient.Controllers
@@ -24,7 +25,7 @@ namespace ConsultationAppointmentClient.Controllers
 
         public ActionResult Logout()
         {
-            HttpContext.Session.SetString("Email", "");
+            HttpContext.Session.SetString("Role", "");
             return RedirectToAction("Login","Home");
         }
 
@@ -37,11 +38,23 @@ namespace ConsultationAppointmentClient.Controllers
 
                  if (email == "test@test.com" && password == "test")
                 {
-                   HttpContext.Session.SetString("Email", email);
-                    //HttpContext.Session.SetString("idUser", email);
-                    //Session["Email"] = email;
-                    //Session["idUser"] = password;
+                    
+                   
+                    User user = new User();
+                    user.Role="Receptionist";
+                    TempData["Role"] = user.Role;
+                    HttpContext.Session.SetString("Role", "Receptionist");
                     return RedirectToAction("Index","Appointment");
+                    
+                }
+                else if (email == "admin@admin.com" && password == "test")
+                {
+                    User user = new User();
+                    user.Role = "Admin";
+                    TempData["Role"] = user.Role;
+                    HttpContext.Session.SetString("Role", "Admin");
+                    return RedirectToAction("Index", "Appointment");
+
                 }
                 else
                 {

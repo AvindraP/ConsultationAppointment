@@ -46,11 +46,11 @@ namespace ConsultationAppointment.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Appointment appointment)
         {
-            // Check for a duplicate appointment based on the Date property
-            if (IsDuplicateAppointment(appointment.Date))
+            // Check for a duplicate appointment based on both Date and Time
+            if (IsDuplicateAppointment(appointment.Date, appointment.Time))
             {
-                ModelState.AddModelError("Date", "An appointment with the same date already exists..");
-                return BadRequest(new { ErrorMessage = "An appointment with the same date already exiists." });
+                ModelState.AddModelError("Date", "An appointment with the same date and time already exists.");
+                return BadRequest(new { ErrorMessage = "An appointment with the same date and time already exists." });
             }
 
             _context.Add(appointment);
@@ -58,10 +58,10 @@ namespace ConsultationAppointment.Controllers
             return Ok(appointment);
         }
 
-        private bool IsDuplicateAppointment(string date)
+        private bool IsDuplicateAppointment(string date, string time)
         {
-            // Check for a duplicate appointment with the same date
-            return _context.Appointments.Any(a => a.Date == date);
+            // Check for a duplicate appointment with the same date and time
+            return _context.Appointments.Any(a => a.Date == date && a.Time == time);
         }
 
         [HttpPut("{appointmentId}")]
