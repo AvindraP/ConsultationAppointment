@@ -4,7 +4,12 @@ using System.Net;
 using System.Text;
 namespace ConsultationAppointmentClient
 {
-    public class ConsultationAPI 
+    public interface factorypatternConsulatationAPI
+    {
+        List<Consultant> ListConsultants();
+
+    }
+    public class ConsultationAPI : factorypatternConsulatationAPI
     {
         private string url = "https://localhost:7159/api/Consultant";
         private HttpClient httpClient = new HttpClient();
