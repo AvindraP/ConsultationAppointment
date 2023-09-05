@@ -39,6 +39,9 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Time)
                 </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ConsultantName)
+                </th>
                 <th></th>
             </tr>
         </thead>
@@ -69,6 +72,9 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Time)
                 </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ConsultantName)
+                    </td>
                 <td>
                         @Html.ActionLink("Edit", "Edit", new { appointmentId=item.AppointmentId }) |
                         @Html.ActionLink("Details", "Details", new { appointmentId=item.AppointmentId }) |

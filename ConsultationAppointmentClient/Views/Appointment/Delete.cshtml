@@ -61,6 +61,12 @@
             <dd class = "col-sm-10">
                 @Html.DisplayFor(model => model.Time)
             </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.ConsultantName)
+                </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ConsultantName)
+             </dd>
         </dl>
             <form asp-action="Delete">
                 <input type="submit" value="Delete" class="btn btn-danger" /> |

@@ -57,6 +57,11 @@
                 <input asp-for="Time" type="time" class="form-control" />
                 <span asp-validation-for="Time" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="ConsultantName" class="control-label"></label>
+                <input asp-for="ConsultantName" class="form-control" />
+                <span asp-validation-for="HomeAddress" class="text-danger"></span>
+            </div>
             <div class="form-group p-t-15">
                 <input type="submit" value="Create" class="btn btn-primary btn btn--radius-2 btn--blue" />
             </div>
@@ -71,7 +76,23 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
-
+@*<script>
+    // Fetch consultant names and populate the dropdown
+    fetch('Appointment/consultant')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data); // Log the data received from the API
+            // Populate the dropdown here
+        })
+        .catch(error => {
+            console.error('Fetch error:', error);
+        });
+</script>*@
 @*<script>
     
     document.addEventListener("DOMContentLoaded", function () {

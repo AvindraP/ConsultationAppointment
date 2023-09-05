@@ -1,0 +1,75 @@
+﻿@model IEnumerable<ConsultationAppointmentClient.Models.Consultant>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="card-4 card-body">
+    <div class="text-md-end">
+            <a class="text-dark" asp-area="" asp-controller="Home" asp-action="Logout">Logout</a>
+    </div>
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+        <h3 class="title">All Consultants</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ConsultantId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ConsultantFirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ConsultantLastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ConsultantContactNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndTime)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ConsultantId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ConsultantFirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ConsultantLastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ConsultantContactNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndTime)
+            </td>
+            <td>
+                    @Html.ActionLink("Edit", "Edit", new {consultantId=item.ConsultantId }) |
+                    @Html.ActionLink("Details", "Details", new { consultantId=item.ConsultantId }) |
+                    @Html.ActionLink("Delete", "Delete", new { consultantId=item.ConsultantId })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</div>

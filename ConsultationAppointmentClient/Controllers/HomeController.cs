@@ -47,7 +47,7 @@ namespace ConsultationAppointmentClient.Controllers
                     return RedirectToAction("Index","Appointment");
                     
                 }
-                else if (email == "admin@admin.com" && password == "test")
+                else if (email == "admin@domain.com" && password == "test")
                 {
                     User user = new User();
                     user.Role = "Admin";

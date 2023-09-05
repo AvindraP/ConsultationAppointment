@@ -42,14 +42,14 @@ namespace ConsultationAppointmentClient
 
         public Appointment CreateAppointment(Appointment appointment)
         {
-            if(url.Trim().Substring(0,5).ToLower()=="https")
+            if (url.Trim().Substring(0, 5).ToLower() == "https")
                 ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
             string json = JsonConvert.SerializeObject(appointment);
             try
             {
-                HttpResponseMessage response = httpClient.PostAsync(url, new StringContent(json, Encoding.UTF8,"application/json")).Result;
-                if(response.IsSuccessStatusCode)
+                HttpResponseMessage response = httpClient.PostAsync(url, new StringContent(json, Encoding.UTF8, "application/json")).Result;
+                if (response.IsSuccessStatusCode)
                 {
                     string result = response.Content.ReadAsStringAsync().Result;
                     var data = JsonConvert.DeserializeObject<Appointment>(result);
@@ -63,7 +63,7 @@ namespace ConsultationAppointmentClient
                     throw new Exception("Error occured at the API Endpoint, Error Info" + result);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception("Error occured at the API Endpoint, Error Info" + ex.Message);
             }
@@ -119,7 +119,7 @@ namespace ConsultationAppointmentClient
             try
             {
                 HttpResponseMessage response = httpClient.GetAsync(url).Result;
-                if(response.IsSuccessStatusCode)
+                if (response.IsSuccessStatusCode)
                 {
                     string result = response.Content.ReadAsStringAsync().Result;
                     var data = JsonConvert.DeserializeObject<Appointment>(result);
@@ -153,7 +153,7 @@ namespace ConsultationAppointmentClient
             try
             {
                 HttpResponseMessage response = httpClient.PutAsync(url, new StringContent(json, Encoding.UTF8, "application/json")).Result;
-                if (!response.IsSuccessStatusCode) 
+                if (!response.IsSuccessStatusCode)
                 {
                     string result = response.Content.ReadAsStringAsync().Result;
                     throw new Exception("Error Occured at the API Endpoint Info.  " + result);
@@ -161,7 +161,7 @@ namespace ConsultationAppointmentClient
             }
             catch (Exception ex)
             {
-                throw new Exception("Error occurred at the API Endpoint, Error Info.  "+ ex.Message);
+                throw new Exception("Error occurred at the API Endpoint, Error Info.  " + ex.Message);
             }
             finally { }
 

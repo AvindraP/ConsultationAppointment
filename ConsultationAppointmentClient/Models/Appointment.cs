@@ -50,5 +50,10 @@ namespace ConsultationAppointmentClient.Models
         [Display(Name = "Time")]
         [StringLength(10)]
         public string Time { get; set; } = "";
+
+        [Required(ErrorMessage = "Select Consultant")]
+        [Display(Name = "Consultant")]
+        [StringLength(75)]
+        public string ConsultantName { get; set; } = "";
     }
 }

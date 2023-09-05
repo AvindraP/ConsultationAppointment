@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ConsultationAppointment.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230803232434_initial")]
-    partial class initial
+    [Migration("20230905133753_consultantfield")]
+    partial class consultantfield
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,6 +26,11 @@ namespace ConsultationAppointment.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<string>("ConsultantName")
+                        .IsRequired()
+                        .HasMaxLength(75)
+                        .HasColumnType("varchar(75)");
+
                     b.Property<string>("ContactNo")
                         .IsRequired()
                         .HasMaxLength(75)
@@ -33,8 +38,7 @@ namespace ConsultationAppointment.Migrations
 
                     b.Property<string>("Date")
                         .IsRequired()
-                        .HasMaxLength(75)
-                        .HasColumnType("varchar(75)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -64,6 +68,46 @@ namespace ConsultationAppointment.Migrations
                     b.HasKey("AppointmentId");
 
                     b.ToTable("Appointments");
+                });
+
+            modelBuilder.Entity("ConsultationAppointment.Model.Consultant", b =>
+                {
+                    b.Property<int>("ConsultantId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConsultantContactNo")
+                        .IsRequired()
+                        .HasMaxLength(75)
+                        .HasColumnType("varchar(75)");
+
+                    b.Property<string>("ConsultantFirstName")
+                        .IsRequired()
+                        .HasMaxLength(75)
+                        .HasColumnType("varchar(75)");
+
+                    b.Property<string>("ConsultantLastName")
+                        .IsRequired()
+                        .HasMaxLength(75)
+                        .HasColumnType("varchar(75)");
+
+                    b.Property<string>("Date")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("EndTime")
+                        .IsRequired()
+                        .HasMaxLength(75)
+                        .HasColumnType("varchar(75)");
+
+                    b.Property<string>("StartTime")
+                        .IsRequired()
+                        .HasMaxLength(75)
+                        .HasColumnType("varchar(75)");
+
+                    b.HasKey("ConsultantId");
+
+                    b.ToTable("Consultants");
                 });
 #pragma warning restore 612, 618
         }

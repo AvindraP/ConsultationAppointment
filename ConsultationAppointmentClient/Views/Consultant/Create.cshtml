@@ -1,0 +1,65 @@
+﻿@model ConsultationAppointmentClient.Models.Consultant
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="card card-4 row col-md-6 offset-md-4">
+    <div class="text-md-end">
+        <a class="text-dark" asp-area="" asp-controller="Home" asp-action="Logout">Logout</a>
+    </div>
+
+    <div class="card-body">
+        <h3 class="title">Create Consultant</h3>
+        <hr />
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @*<div class="form-group">
+                <label asp-for="ConsultantId" class="control-label"></label>
+                <input asp-for="ConsultantId" class="form-control" />
+                <span asp-validation-for="ConsultantId" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="ConsultantFirstName" class="control-label"></label>
+                <input asp-for="ConsultantFirstName" class="form-control" />
+                <span asp-validation-for="ConsultantFirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConsultantLastName" class="control-label"></label>
+                <input asp-for="ConsultantLastName" class="form-control" />
+                <span asp-validation-for="ConsultantLastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConsultantContactNo" class="control-label"></label>
+                <input asp-for="ConsultantContactNo" class="form-control" />
+                <span asp-validation-for="ConsultantContactNo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Date" class="control-label"></label>
+                <input asp-for="Date" type="date" class="form-control" />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StartTime" class="control-label"></label>
+                <input asp-for="StartTime" type="time" class="form-control" />
+                <span asp-validation-for="StartTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EndTime" class="control-label"></label>
+                <input asp-for="EndTime" type="time" class="form-control" />
+                <span asp-validation-for="EndTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary btn btn--radius-2 btn--blue" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-primary btn btn--radius-2 btn--blue">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

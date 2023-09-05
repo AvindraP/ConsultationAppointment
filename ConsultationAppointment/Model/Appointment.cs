@@ -29,6 +29,11 @@ namespace ConsultationAppointment.Model
         [StringLength(75)]
         public string Time { get; set; } = "";
 
+        [StringLength(75)]
+        public string ConsultantName { get; set; } = "";
+
+        //[ForeignKey("ConsultantId")]
+        //public string ConsultantId { get; set; } = "";
 
     }
 }

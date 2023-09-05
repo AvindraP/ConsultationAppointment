@@ -76,18 +76,25 @@ namespace ConsultationAppointment.Controllers
             return Ok();
         }
 
-        [HttpDelete("{AppointmentId}")]
-        public async Task<IActionResult> Delete(int AppointmentId)
+        [HttpDelete("{appointmentId}")]
+        public async Task<IActionResult> Delete(int appointmentId)
         {
-            var appointment = await _context.Appointments.FindAsync(AppointmentId);
+            var appointment = await _context.Appointments.FindAsync(appointmentId);
             if(appointment == null)
             {
-                return NotFound();
+                return NotFound("Appointment Not found");
             }
             _context.Appointments.Remove(appointment);
             await _context.SaveChangesAsync();
 
             return Ok();
         }
+
+        //[HttpGet("consultant")]
+        //public IActionResult GetConsultantNames()
+        //{
+        //    var consultantNames = _context.Consultants.Select(c => c.ConsultantFirstName).ToList();
+        //    return Ok(consultantNames);
+        //}
     }
 }

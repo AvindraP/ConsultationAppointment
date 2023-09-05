@@ -3,7 +3,10 @@ using ConsultationAppointmentClient;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddScoped<ConsultationAPI>();
 builder.Services.AddScoped<APIGateway>();
+
+
 builder.Services.AddControllersWithViews();
 builder.Services.AddSession(options =>
 {

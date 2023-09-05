@@ -12,6 +12,7 @@ namespace ConsultationAppointment.Model
         }
 
         public DbSet<Appointment> Appointments { get;set; }
+        public DbSet<Consultant> Consultants { get;set; }
 
     }
 }
