@@ -15,7 +15,7 @@
     <div class="card-body">
         <h3 class="title">Create Appointment</h3>
         <hr />
-        <form asp-action="Create" class="" id="appointment-form">
+        <form asp-action="Create" class="" id="appointmentForm">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             @*<div class="form-group">
                 <label asp-for="AppointmentId" class="control-label"></label>
@@ -59,16 +59,18 @@
             </div>
             <div class="form-group">
                 <label asp-for="ConsultantName" class="control-label"></label>
-                <input asp-for="ConsultantName" class="form-control" />
+                @*<input asp-for="ConsultantName" class="form-control" />*@
+                <select asp-for="ConsultantName" id="consultantDropdown" class="custom-select form-control"></select>
                 <span asp-validation-for="HomeAddress" class="text-danger"></span>
             </div>
             <div class="form-group p-t-15">
                 <input type="submit" value="Create" class="btn btn-primary btn btn--radius-2 btn--blue" />
             </div>
+            <div id="errorMessage"></div>
         </form>
     </div>
 </div>
-<div id="errorMessage" style="display:block;" class="text-danger"></div>
+
 <div>
     <a asp-action="Index" class="btn btn-primary btn btn--radius-2 btn--blue">Back to List</a>
 </div>
@@ -76,6 +78,32 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    const consultantDropdown = document.getElementById("consultantDropdown");
+
+    // Fetch consultant data from the Web API
+    fetch("https://localhost:7159/api/consultant")
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Populate the dropdown with consultant data
+            data.forEach(consultant => {
+                const option = document.createElement("option");
+                const fullName = `${consultant.consultantFirstName} ${consultant.consultantLastName}`;
+                option.value = fullName;
+                option.textContent = `${consultant.consultantFirstName} ${consultant.consultantLastName}`;
+                consultantDropdown.appendChild(option);
+            });
+        })
+        .catch(error => {
+            console.error("Error fetching data:", error);
+        });
+</script>
 @*<script>
     // Fetch consultant names and populate the dropdown
     fetch('Appointment/consultant')
@@ -94,49 +122,6 @@
         });
 </script>*@
 @*<script>
-    
-    document.addEventListener("DOMContentLoaded", function () {
-        var form = document.getElementById("create-form");
-        var errorMessageElement = document.getElementById("error-message"); // Ensure you have this element
-
-        if (form) {
-            form.addEventListener("submit", function (event) {
-                event.preventDefault();
-
-                var formData = new FormData(this);
-
-                fetch("/api/Appointment/Create", {
-                    method: "POST",
-                    body: formData
-                })
-                    .then(response => {
-                        if (response.status === 400) {
-                            return response.json().then(errorResponse => {
-                                var errorMessage = errorResponse.errorMessage;
-                                errorMessageElement.innerText = errorMessage;
-                            }); 
-                        } else if (response.ok) {
-                            return response.json();
-                        } else {
-                            // Handle other status codes as needed
-                        }
-                    })
-                    .then(data => {
-                        if (!errorMessageElement.innerText) {
-                            // No error, perform the redirect here
-                            window.location.href = "/index"; // Adjust the URL as needed
-                            console.log("no error test:", errorMessageElement);
-                            console.log("no errr", errorMessage);
-                        }
-                    })
-                    .catch(error => {
-                        console.error("Error:", error);
-                        console.log("Error message element:", errorMessageElement);
-                        console.log("Error message:", errorMessage);
-                    });
-            });
-        }
-    });
 
         //document.getElementById("Date").addEventListener("change", function() {
         //    // Get the selected date

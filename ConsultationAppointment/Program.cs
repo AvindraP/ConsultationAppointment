@@ -15,6 +15,17 @@ builder.Services.AddControllers();
 
 //builder.Services.AddDbContext<ApiDbContext>(options => options.UseMySql(builder.Configuration.GetSection("ConnectionStrings:dbconn").Value));
 
+
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(builder =>
+    {
+        builder.WithOrigins("https://localhost:7243") // Adjust the origin(s) as needed
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
+
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
@@ -35,7 +46,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
-
+app.UseCors();
 app.MapControllers();
 
 app.Run();
