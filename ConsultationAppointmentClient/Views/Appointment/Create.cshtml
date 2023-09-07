@@ -24,37 +24,37 @@
             </div>*@
             <div class="form-group">
                 <label asp-for="FirstName" class="control-label"></label>
-                <input asp-for="FirstName" class="form-control" />
+                <input asp-for="FirstName" id="FirstName" class="form-control" />
                 <span asp-validation-for="FirstName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="LastName" class="control-label"></label>
-                <input asp-for="LastName" class="form-control" />
+                <input asp-for="LastName" id="LastName" class="form-control" />
                 <span asp-validation-for="LastName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Nic" class="control-label"></label>
-                <input asp-for="Nic" class="form-control" />
+                <input asp-for="Nic" id="Nic" class=" form-control" />
                 <span asp-validation-for="Nic" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="HomeAddress" class="control-label"></label>
-                <input asp-for="HomeAddress" class="form-control" />
+                <input asp-for="HomeAddress" id="HomeAddress" class="form-control" />
                 <span asp-validation-for="HomeAddress" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ContactNo" class="control-label"></label>
-                <input asp-for="ContactNo" class="form-control" />
+                <input asp-for="ContactNo" id="ContactNo" class="form-control" />
                 <span asp-validation-for="ContactNo" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Date" class="control-label"></label>
-                <input asp-for="Date" type="date" class="form-control" />
+                <input asp-for="Date" id="date" type="date" class="form-control" />
                 <span asp-validation-for="Date" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Time" class="control-label"></label>
-                <input asp-for="Time" type="time" class="form-control" />
+                <input asp-for="Time" type="time" id="time" class="form-control" />
                 <span asp-validation-for="Time" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -103,6 +103,63 @@
         .catch(error => {
             console.error("Error fetching data:", error);
         });
+</script>
+<script>
+    document.getElementById("appointmentForm").addEventListener("submit", async function (event) {
+        event.preventDefault(); // Prevent the default form submission
+
+        // Retrieve the Consultant data from the form fields
+        const date = document.getElementById("date").value;
+        const firstName = document.getElementById("FirstName").value;
+        const lastName = document.getElementById("LastName").value;
+        const nic = document.getElementById("Nic").value;
+        const homeAddress = document.getElementById("HomeAddress").value;
+        const contactNo = document.getElementById("ContactNo").value;
+        const time = document.getElementById("time").value;
+        const consultant = document.getElementById("consultantDropdown").value;
+
+        const appointmentData = {
+            Date: date,
+            FirstName: firstName,
+            LastName: lastName,
+            Nic: nic,
+            HomeAddress: homeAddress,
+            ContactNo: contactNo,
+            Time: time,
+            ConsultantName: consultant,
+        };
+
+        // Make an HTTP POST request to the server
+        try {
+            const response = await fetch("https://localhost:7159/api/Appointment/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(appointmentData),
+            });
+
+            if (response.status === 200) {
+                // Consultant created successfully
+                const appointment = await response.json();
+                // Handle success (e.g., show a success message)
+                window.location.href = `/appointment/index`;
+                console.log("Appointment created successfully:", appointment);
+            } else if (response.status === 409) {
+                // Appointment with the same date already exists
+                const errorMessage = await response.text();
+                // Display the error message to the user
+                console.error("Appointment with the same date already exists");
+                alert(errorMessage);
+            } else {
+                // Handle other error cases (e.g., display a generic error message)
+                console.error("An error occurred:", response.status);
+            }
+        } catch (error) {
+            // Handle network errors or other exceptions
+            console.error("An error occurred:", error);
+        }
+    });
 </script>
 @*<script>
     // Fetch consultant names and populate the dropdown

@@ -46,22 +46,16 @@ namespace ConsultationAppointment.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Appointment appointment)
         {
-            // Check for a duplicate appointment based on both Date and Time
-            if (IsDuplicateAppointment(appointment.Date, appointment.Time))
+            var existingAppointment = _context.Appointments.FirstOrDefault(c => c.Date == appointment.Date && c.Time == appointment.Time);
+
+            if (existingAppointment != null)
             {
-                ModelState.AddModelError("Date", "An appointment with the same date and time already exists.");
-                return BadRequest(new { ErrorMessage = "An appointment with the same date and time already exists." });
+                return Conflict("An Appointment already exists with the same date and time");
             }
 
             _context.Add(appointment);
             await _context.SaveChangesAsync();
             return Ok(appointment);
-        }
-
-        private bool IsDuplicateAppointment(string date, string time)
-        {
-            // Check for a duplicate appointment with the same date and time
-            return _context.Appointments.Any(a => a.Date == date && a.Time == time);
         }
 
         [HttpPut("{appointmentId}")]
@@ -76,10 +70,10 @@ namespace ConsultationAppointment.Controllers
             return Ok();
         }
 
-        [HttpDelete("{appointmentId}")]
-        public async Task<IActionResult> Delete(int appointmentId)
+        [HttpDelete("{AppointmentId}")]
+        public async Task<IActionResult> Delete(int AppointmentId)
         {
-            var appointment = await _context.Appointments.FindAsync(appointmentId);
+            var appointment = await _context.Appointments.FindAsync(AppointmentId);
             if(appointment == null)
             {
                 return NotFound("Appointment Not found");

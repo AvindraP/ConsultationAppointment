@@ -110,7 +110,7 @@ namespace ConsultationAppointmentClient.Controllers
 
         //delete method
         [HttpGet]
-        public IActionResult Delete(int appointmentId)
+        public IActionResult Delete(int AppointmentId)
         {
             string? role = TempData["Role"] as string;
             string? userrole = HttpContext.Session.GetString("Role");
@@ -119,7 +119,7 @@ namespace ConsultationAppointmentClient.Controllers
             if (userrole == "Admin")
             {
                 Appointment appointment;
-                appointment = apiGateway.GetAppointment(appointmentId);
+                appointment = apiGateway.GetAppointment(AppointmentId);
                 return View(appointment);
             }
             else

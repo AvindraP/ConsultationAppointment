@@ -168,12 +168,12 @@ namespace ConsultationAppointmentClient
             return;
         }
 
-        public void DeleteAppointment(int appointmentId)
+        public void DeleteAppointment(int AppointmentId)
         {
             if (url.Trim().Substring(0, 5).ToLower() == "https")
                 ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
-            url = url + "/" + appointmentId;
+            url = url + "/" + AppointmentId;
 
             try
             {
